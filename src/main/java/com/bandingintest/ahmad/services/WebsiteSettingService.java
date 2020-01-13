@@ -46,6 +46,7 @@ public class WebsiteSettingService {
 		ws.setEmail(websitesetting.getEmail());
 		ws.setCity(websitesetting.getCity());
 		ws.setAddress(websitesetting.getAddress());
+		ws.setCode(websitesetting.getCode());
 		WebsiteSetting update = websitesettingRepository.save(ws);
 		return update;
 	}
