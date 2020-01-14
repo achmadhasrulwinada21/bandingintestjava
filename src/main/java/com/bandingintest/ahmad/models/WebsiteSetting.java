@@ -62,20 +62,20 @@ public class WebsiteSetting  implements Serializable {
     @JsonView(DataTablesOutput.View.class)
     private String address;
 	
-	@Column(name = "code", length = 20)
-    @JsonView(DataTablesOutput.View.class)
-    private String code;
+	@Column(name="code")
+	private Integer code;
 	
-	public String getCode() {
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public Integer getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(Integer code) {
 		this.code = code;
-	}
-
-	public String getEmail() {
-		return email;
 	}
 
 	public void setEmail(String email) {

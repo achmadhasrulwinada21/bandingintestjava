@@ -8,6 +8,7 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+
 import com.bandingintest.ahmad.exception.ResourceNotFoundException;
 import com.bandingintest.ahmad.models.WebsiteSetting;
 import com.bandingintest.ahmad.repositories.WebsiteSettingRepository;
@@ -26,6 +27,14 @@ public class WebsiteSettingService {
 		return websitesettingRepository.findAll(input);
 	}
 	
+	public WebsiteSetting getByCode(Integer code) {
+		try {
+			throw new ResourceNotFoundException("WebsiteSetting", "Code not found", code);
+		}catch(Exception e) {
+			return websitesettingRepository.findByCode(code);
+		}
+	}
+	
 	public WebsiteSetting insert(WebsiteSetting websitesetting) {
 		return websitesettingRepository.save(websitesetting);
 	}
@@ -34,8 +43,9 @@ public class WebsiteSettingService {
 		return websitesettingRepository.findById(id);
 	}
 	
-	public WebsiteSetting update(Integer id, WebsiteSetting websitesetting) {
-		WebsiteSetting ws = websitesettingRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Data not found", "id", id));
+	public WebsiteSetting update(Integer code, WebsiteSetting websitesetting) {
+		WebsiteSetting ws = websitesettingRepository.findByCode(code);
+		if(ws != null) {
 		ws.setWebsite_name(websitesetting.getWebsite_name());
 		ws.setLogo_fb(websitesetting.getLogo_fb());
 		ws.setLogo_twitter(websitesetting.getLogo_twitter());
@@ -49,6 +59,9 @@ public class WebsiteSettingService {
 		ws.setCode(websitesetting.getCode());
 		WebsiteSetting update = websitesettingRepository.save(ws);
 		return update;
+		}else {
+			throw new ResourceNotFoundException("WebsiteSetting", "Code not found", ws.getCode());
+		}
 	}
 	
 	public ResponseEntity<?> delete(Integer id){
