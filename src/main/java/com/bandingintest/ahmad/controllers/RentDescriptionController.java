@@ -18,53 +18,48 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bandingintest.ahmad.models.Banner;
-import com.bandingintest.ahmad.models.WebsiteSetting;
-import com.bandingintest.ahmad.services.BannerService;
+import com.bandingintest.ahmad.models.RentDescription;
+import com.bandingintest.ahmad.services.RentDescriptionService;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
-public class BannerController {
-	
+public class RentDescriptionController {
+
 	@Autowired
-	BannerService bannerService;
+	RentDescriptionService rentdescriptionService;
 	
-	@GetMapping("/list/banners")
+	@GetMapping("/list/rentdesciptions")
     @JsonView(DataTablesOutput.View.class)
-	public DataTablesOutput<Banner> listAll(@Valid DataTablesInput input){
-		return bannerService.listAll(input);
+	public DataTablesOutput<RentDescription> listAll(@Valid DataTablesInput input){
+		return rentdescriptionService.listAll(input);
 	}
 	
-	@GetMapping("/banners")
-	public Iterable<Banner> getAll(){
-		return bannerService.getAll();
+	@GetMapping("/rentdesciptions")
+	public Iterable<RentDescription> getAll(){
+		return rentdescriptionService.getAll();
 	}
 	
-	@GetMapping("/banner/{id}")
-	public Optional<Banner> getById(@PathVariable("id") Integer id){
-		return bannerService.getById(id);
+	@GetMapping("/rentdesciptions/{id}")
+	public Optional<RentDescription> getById(@PathVariable("id") Integer id){
+		return rentdescriptionService.getById(id);
 	}
 	
-	@GetMapping("/banners/{category}")
-	public Banner getByCategory(@PathVariable("category") String category) {
-		return bannerService.getByCategory(category);
+	@PostMapping("/rentdesciption")
+	public RentDescription insert (@RequestBody RentDescription rent) {
+		return rentdescriptionService.insert(rent);
 	}
 	
-	@PostMapping("/banner")
-	public Banner insert (@RequestBody Banner banner) {
-		return bannerService.insert(banner);
+	@PutMapping("/rentdesciption/{id}")
+	public RentDescription update(@PathVariable("id") Integer id, @RequestBody RentDescription rent) {
+		return rentdescriptionService.update(id, rent);
 	}
 	
-	@PutMapping("/banner/{id}")
-	public Banner update(@PathVariable("id") Integer id, @RequestBody Banner banner) {
-		return bannerService.update(id, banner);
-	}
-	
-	@DeleteMapping("/banner/{id}")
+	@DeleteMapping("/rentdesciption/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") Integer id){
-		return bannerService.delete(id);
+		return rentdescriptionService.delete(id);
 	}
 
+	
 }

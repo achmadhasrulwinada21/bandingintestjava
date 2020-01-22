@@ -16,9 +16,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
-@Table(name = "banner")
+@Table(name = "rental_rules")
 @EntityListeners(AuditingEntityListener.class)
-public class Banner  implements Serializable {
+public class Rent implements Serializable{
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,37 +26,25 @@ public class Banner  implements Serializable {
 	@Column(name = "id", nullable = false, unique = true)
     private int id;
 	
-	@Column(name = "title", length = 120)
+	@Column(name = "name_equipment", length = 120)
     @JsonView(DataTablesOutput.View.class)
-    private String title;
+    private String name_equipment;
 	
-	@Column (name= "description", columnDefinition="TEXT")
-	@JsonView (DataTablesOutput.View.class)
-	private String description;
-	
-	@Column(name = "button_name", length = 120)
+	@Column(name = "harga_awal", length = 120)
     @JsonView(DataTablesOutput.View.class)
-    private String button_name;
+    private String harga_awal;
 	
-	@Column(name = "button_link", length = 120)
+	@Column(name = "harga_akhir", length = 120)
     @JsonView(DataTablesOutput.View.class)
-    private String button_link;
+    private String harga_akhir;
 	
 	@Column(name = "image", columnDefinition="TEXT")
     @JsonView(DataTablesOutput.View.class)
     private String image;
 	
-	@Column(name = "category", length = 120)
-    @JsonView(DataTablesOutput.View.class)
-    private String category;
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
+	@Column (name= "rental_rules", columnDefinition="TEXT", nullable = true)
+	@JsonView (DataTablesOutput.View.class)
+	private String rental_rules;
 
 	public int getId() {
 		return id;
@@ -66,36 +54,28 @@ public class Banner  implements Serializable {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getName_equipment() {
+		return name_equipment;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName_equipment(String name_equipment) {
+		this.name_equipment = name_equipment;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getHarga_awal() {
+		return harga_awal;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setHarga_awal(String harga_awal) {
+		this.harga_awal = harga_awal;
 	}
 
-	public String getButton_name() {
-		return button_name;
+	public String getHarga_akhir() {
+		return harga_akhir;
 	}
 
-	public void setButton_name(String button_name) {
-		this.button_name = button_name;
-	}
-
-	public String getButton_link() {
-		return button_link;
-	}
-
-	public void setButton_link(String button_link) {
-		this.button_link = button_link;
+	public void setHarga_akhir(String harga_akhir) {
+		this.harga_akhir = harga_akhir;
 	}
 
 	public String getImage() {
@@ -106,4 +86,11 @@ public class Banner  implements Serializable {
 		this.image = image;
 	}
 
+	public String getRental_rules() {
+		return rental_rules;
+	}
+
+	public void setRental_rules(String rental_rules) {
+		this.rental_rules = rental_rules;
+	}
 }

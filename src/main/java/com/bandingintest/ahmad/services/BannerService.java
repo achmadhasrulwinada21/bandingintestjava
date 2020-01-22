@@ -34,13 +34,18 @@ public class BannerService {
 		return bannerRepository.findById(id);
 	}
 	
+	public Banner getByCategory(String category){
+		return bannerRepository.findByCategory(category);
+	}
+	
 	public Banner update(Integer id, Banner banner) {
 		Banner br = bannerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Data not found", "id", id));
 		br.setTitle(banner.getTitle());
 		br.setDescription(banner.getDescription());
 		br.setImage(banner.getImage());
 		br.setButton_name(banner.getButton_name());
-		br.setButton_link(banner.getButton_link());		
+		br.setButton_link(banner.getButton_link());	
+		br.setCategory(banner.getCategory());
 		Banner update = bannerRepository.save(br);
 		return update;
 	}

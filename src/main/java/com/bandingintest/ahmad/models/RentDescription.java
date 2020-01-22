@@ -1,7 +1,5 @@
 package com.bandingintest.ahmad.models;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -16,10 +14,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
-@Table(name = "banner")
+@Table(name = "rent_description")
 @EntityListeners(AuditingEntityListener.class)
-public class Banner  implements Serializable {
-	
+public class RentDescription {
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(DataTablesOutput.View.class)
@@ -30,34 +28,10 @@ public class Banner  implements Serializable {
     @JsonView(DataTablesOutput.View.class)
     private String title;
 	
-	@Column (name= "description", columnDefinition="TEXT")
-	@JsonView (DataTablesOutput.View.class)
-	private String description;
-	
-	@Column(name = "button_name", length = 120)
+	@Column(name = "description", columnDefinition="TEXT")
     @JsonView(DataTablesOutput.View.class)
-    private String button_name;
+    private String description;
 	
-	@Column(name = "button_link", length = 120)
-    @JsonView(DataTablesOutput.View.class)
-    private String button_link;
-	
-	@Column(name = "image", columnDefinition="TEXT")
-    @JsonView(DataTablesOutput.View.class)
-    private String image;
-	
-	@Column(name = "category", length = 120)
-    @JsonView(DataTablesOutput.View.class)
-    private String category;
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -82,22 +56,6 @@ public class Banner  implements Serializable {
 		this.description = description;
 	}
 
-	public String getButton_name() {
-		return button_name;
-	}
-
-	public void setButton_name(String button_name) {
-		this.button_name = button_name;
-	}
-
-	public String getButton_link() {
-		return button_link;
-	}
-
-	public void setButton_link(String button_link) {
-		this.button_link = button_link;
-	}
-
 	public String getImage() {
 		return image;
 	}
@@ -106,4 +64,10 @@ public class Banner  implements Serializable {
 		this.image = image;
 	}
 
+	@Column(name = "image", columnDefinition="TEXT")
+    @JsonView(DataTablesOutput.View.class)
+    private String image;
+	
+	
+	
 }

@@ -18,53 +18,47 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bandingintest.ahmad.models.Banner;
-import com.bandingintest.ahmad.models.WebsiteSetting;
-import com.bandingintest.ahmad.services.BannerService;
+import com.bandingintest.ahmad.models.Rent;
+import com.bandingintest.ahmad.services.RentService;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
-public class BannerController {
+public class RentController {
 	
 	@Autowired
-	BannerService bannerService;
+	RentService rentService;
 	
-	@GetMapping("/list/banners")
+	@GetMapping("/list/rents")
     @JsonView(DataTablesOutput.View.class)
-	public DataTablesOutput<Banner> listAll(@Valid DataTablesInput input){
-		return bannerService.listAll(input);
+	public DataTablesOutput<Rent> listAll(@Valid DataTablesInput input){
+		return rentService.listAll(input);
 	}
 	
-	@GetMapping("/banners")
-	public Iterable<Banner> getAll(){
-		return bannerService.getAll();
+	@GetMapping("/rents")
+	public Iterable<Rent> getAll(){
+		return rentService.getAll();
 	}
 	
-	@GetMapping("/banner/{id}")
-	public Optional<Banner> getById(@PathVariable("id") Integer id){
-		return bannerService.getById(id);
+	@GetMapping("/rents/{id}")
+	public Optional<Rent> getById(@PathVariable("id") Integer id){
+		return rentService.getById(id);
 	}
 	
-	@GetMapping("/banners/{category}")
-	public Banner getByCategory(@PathVariable("category") String category) {
-		return bannerService.getByCategory(category);
+	@PostMapping("/rent")
+	public Rent insert (@RequestBody Rent rent) {
+		return rentService.insert(rent);
 	}
 	
-	@PostMapping("/banner")
-	public Banner insert (@RequestBody Banner banner) {
-		return bannerService.insert(banner);
+	@PutMapping("/rent/{id}")
+	public Rent update(@PathVariable("id") Integer id, @RequestBody Rent rent) {
+		return rentService.update(id, rent);
 	}
 	
-	@PutMapping("/banner/{id}")
-	public Banner update(@PathVariable("id") Integer id, @RequestBody Banner banner) {
-		return bannerService.update(id, banner);
-	}
-	
-	@DeleteMapping("/banner/{id}")
+	@DeleteMapping("/rent/{id}")
 	public ResponseEntity<?> delete(@PathVariable("id") Integer id){
-		return bannerService.delete(id);
+		return rentService.delete(id);
 	}
 
 }
